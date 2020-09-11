@@ -2,35 +2,57 @@ import React, { Component } from "react";
 import { Form, Button, Col } from "react-bootstrap";
 
 export default class index extends Component {
-  onSubmit = async () => {
-    const body = {
-      query: `mutation{
-  addEmployee(Employee:{
-    firstName: ""
-    lastName: "A"
-    emailId: "sairakesh@gmail.com"
-   	skills: "HTML"
-    rate: 65
-    city: "Hyd"
-    State: "TS"
-    zip: 64428
-  }){
-    firstName
-    lastName
-  }
-}`,
+  constructor(props) {
+    this.state = {
+      data: {
+        firstName: "",
+        lastName: "",
+        emailId: "",
+        skills: "",
+        rate: "",
+        city: "",
+        state: "",
+        zip: "",
+      },
+      loading: false,
+      errors: {},
     };
-    try {
-      const data = await fetch("http://localhost:5000/api/", {
-        method: "POST",
-        body: JSON.stringify(body),
-        headers: { "Content-Type": "application/json" },
-      });
-      console.log("data", data);
-    } catch (error) {
-      console.log(error);
+  }
+
+  onSubmit = (e) => {
+    const errors = this.validate(this.state.data);
+    this.setState({ errors });
+    if (Object.keys(errors).length === 0) {
+      const {
+        firstName,
+        lastName,
+        emailId,
+        skills,
+        rate,
+        city,
+        state,
+        zip,
+      } = this.state.data;
+      this.props.dispatch(
+        addClient({
+          firstName: firstName,
+          lastName: lastName,
+          emailId: emailId,
+          skills: skills,
+          rate: rate,
+          city: city,
+          state: state,
+          zip: zip,
+        })
+      );
     }
   };
+
+  onChange = (e) =>
+    this.setState({
+      data: { ...this.state.data, [e.target.name]: e.target.value },
+    });
+
   render() {
     return (
       <div className="Add_Employee">
@@ -39,14 +61,24 @@ export default class index extends Component {
             <Form.Group as={Col} controlId="formGridFirstName">
               <div class="col-xs-2">
                 <Form.Label>First Name</Form.Label>
-                <Form.Control type="text" placeholder="Enter First Name" />
+                <Form.Control
+                  value={data.firstName}
+                  onChange={this.onChange}
+                  type="text"
+                  placeholder="Enter First Name"
+                />
               </div>
             </Form.Group>
 
             <Form.Group as={Col} controlId="formGridLastName">
               <div class="col-xs-2">
                 <Form.Label>Last Name</Form.Label>
-                <Form.Control type="text" placeholder="Enter Last Name" />
+                <Form.Control
+                  value={data.lastName}
+                  onChange={this.onChange}
+                  type="text"
+                  placeholder="Enter Last Name"
+                />
               </div>
             </Form.Group>
           </Form.Row>
@@ -54,7 +86,12 @@ export default class index extends Component {
           <Form.Group as={Col} controlId="formGridEmail">
             <div class="col-xs-3">
               <Form.Label>Email</Form.Label>
-              <Form.Control type="email" placeholder="Enter email" />
+              <Form.Control
+                value={data.emailId}
+                onChange={this.onChange}
+                type="email"
+                placeholder="Enter email"
+              />
             </div>
           </Form.Group>
 
@@ -82,23 +119,23 @@ export default class index extends Component {
 
           <Form.Group as={Col} controlId="formGridRate">
             <Form.Label>Rate</Form.Label>
-            <Form.Control />
+            <Form.Control value={data.rate} onChange={this.onChange} />
           </Form.Group>
 
           <Form.Row>
             <Form.Group as={Col} controlId="formGridCity">
               <Form.Label>City</Form.Label>
-              <Form.Control />
+              <Form.Control value={data.city} onChange={this.onChange} />
             </Form.Group>
 
             <Form.Group as={Col} controlId="formGridState">
               <Form.Label>State</Form.Label>
-              <Form.Control />
+              <Form.Control value={data.state} onChange={this.onChange} />
             </Form.Group>
 
             <Form.Group as={Col} controlId="formGridZip">
               <Form.Label>Zip</Form.Label>
-              <Form.Control />
+              <Form.Control value={data.zip} onChange={this.onChange} />
             </Form.Group>
           </Form.Row>
 
