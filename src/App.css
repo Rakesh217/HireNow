@@ -3,6 +3,15 @@
   height: 500px;
   object-fit: cover
 }
+.Add_Employee{
+  padding: 5%;
+  content: center;
+  width: 70%
+}
+
+.form-control {
+  width: 50% !important;
+}
 /* .App {
   text-align: center;
 }

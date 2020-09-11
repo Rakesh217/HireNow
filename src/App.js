@@ -1,12 +1,12 @@
-import React from 'react';
-import './App.css';
-import Header from './components/Header/index';
-import Home from './components/Home/index';
-import Employees from './components/Employees/index';
-import Filter from './components/Filter/index';
-import Create_Employee from './components/Create_Employee/index';
+import React from "react";
+import "./App.css";
+import Header from "./components/Header/index";
+import Home from "./components/Home/index";
+import Employees from "./components/Employees/index";
+import Filter from "./components/Filter/index";
+import Create_Employee from "./components/Create_Employee/index";
 
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 import "react-alice-carousel/lib/alice-carousel.css";
 
 function App() {
@@ -23,4 +23,5 @@ function App() {
 export default App;
 
 //  <Home></Home>
-//        <Employees></Employees>
+//  <Employees></Employees>
+//<Create_Employee></Create_Employee>
