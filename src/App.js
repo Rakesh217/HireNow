@@ -9,15 +9,12 @@ import Store from "./redux/store/index";
 import { Provider } from "react-redux";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-alice-carousel/lib/alice-carousel.css";
-
+import Routes from "./Routes";
 function App() {
   return (
     <Provider store={Store}>
       <div className="App">
-        <header className="App-header">
-          <Header></Header>
-          <Create_Employee></Create_Employee>
-        </header>
+        <Routes />
       </div>
     </Provider>
   );

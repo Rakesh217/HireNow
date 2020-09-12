@@ -50,6 +50,8 @@ class index extends Component {
         zip: zip,
       })
     );
+
+    this.props.history.push("/");
     // }
   };
 
