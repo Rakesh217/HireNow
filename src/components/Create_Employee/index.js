@@ -1,14 +1,17 @@
 import React, { Component } from "react";
 import { Form, Button, Col } from "react-bootstrap";
+import { create_employees } from "../../redux/actions/employees";
+import { connect } from "react-redux";
 
-export default class index extends Component {
+class index extends Component {
   constructor(props) {
+    super(props);
     this.state = {
       data: {
         firstName: "",
         lastName: "",
         emailId: "",
-        skills: "",
+        skills: "Java",
         rate: "",
         city: "",
         state: "",
@@ -20,32 +23,34 @@ export default class index extends Component {
   }
 
   onSubmit = (e) => {
-    const errors = this.validate(this.state.data);
-    this.setState({ errors });
-    if (Object.keys(errors).length === 0) {
-      const {
-        firstName,
-        lastName,
-        emailId,
-        skills,
-        rate,
-        city,
-        state,
-        zip,
-      } = this.state.data;
-      this.props.dispatch(
-        addClient({
-          firstName: firstName,
-          lastName: lastName,
-          emailId: emailId,
-          skills: skills,
-          rate: rate,
-          city: city,
-          state: state,
-          zip: zip,
-        })
-      );
-    }
+    e.preventDefault();
+    // const errors = this.validate(this.state.data);
+    // this.setState({ errors });
+    console.log("Data", this.state.data);
+    // if (Object.keys(errors).length === 0) {
+    const {
+      firstName,
+      lastName,
+      emailId,
+      skills,
+      rate,
+      city,
+      state,
+      zip,
+    } = this.state.data;
+    this.props.dispatch(
+      create_employees({
+        firstName: firstName,
+        lastName: lastName,
+        emailId: emailId,
+        skills: skills,
+        rate: rate,
+        city: city,
+        state: state,
+        zip: zip,
+      })
+    );
+    // }
   };
 
   onChange = (e) =>
@@ -62,7 +67,8 @@ export default class index extends Component {
               <div class="col-xs-2">
                 <Form.Label>First Name</Form.Label>
                 <Form.Control
-                  value={data.firstName}
+                  name="firstName"
+                  value={this.state.data.firstName}
                   onChange={this.onChange}
                   type="text"
                   placeholder="Enter First Name"
@@ -74,7 +80,8 @@ export default class index extends Component {
               <div class="col-xs-2">
                 <Form.Label>Last Name</Form.Label>
                 <Form.Control
-                  value={data.lastName}
+                  name="lastName"
+                  value={this.state.data.lastName}
                   onChange={this.onChange}
                   type="text"
                   placeholder="Enter Last Name"
@@ -87,7 +94,8 @@ export default class index extends Component {
             <div class="col-xs-3">
               <Form.Label>Email</Form.Label>
               <Form.Control
-                value={data.emailId}
+                name="emailId"
+                value={this.state.data.emailId}
                 onChange={this.onChange}
                 type="email"
                 placeholder="Enter email"
@@ -119,23 +127,39 @@ export default class index extends Component {
 
           <Form.Group as={Col} controlId="formGridRate">
             <Form.Label>Rate</Form.Label>
-            <Form.Control value={data.rate} onChange={this.onChange} />
+            <Form.Control
+              name="rate"
+              value={this.state.data.rate}
+              onChange={this.onChange}
+            />
           </Form.Group>
 
           <Form.Row>
             <Form.Group as={Col} controlId="formGridCity">
               <Form.Label>City</Form.Label>
-              <Form.Control value={data.city} onChange={this.onChange} />
+              <Form.Control
+                name="city"
+                value={this.state.data.city}
+                onChange={this.onChange}
+              />
             </Form.Group>
 
             <Form.Group as={Col} controlId="formGridState">
               <Form.Label>State</Form.Label>
-              <Form.Control value={data.state} onChange={this.onChange} />
+              <Form.Control
+                name="state"
+                value={this.state.data.state}
+                onChange={this.onChange}
+              />
             </Form.Group>
 
             <Form.Group as={Col} controlId="formGridZip">
               <Form.Label>Zip</Form.Label>
-              <Form.Control value={data.zip} onChange={this.onChange} />
+              <Form.Control
+                name="zip"
+                value={this.state.data.zip}
+                onChange={this.onChange}
+              />
             </Form.Group>
           </Form.Row>
 
@@ -147,3 +171,12 @@ export default class index extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    // userObject: state.auth.user,
+    // checkEmail: state.auth.checkEmail,
+  };
+};
+
+export default connect(mapStateToProps)(index);
