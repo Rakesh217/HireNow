@@ -11,7 +11,7 @@ class index extends Component {
         firstName: "",
         lastName: "",
         emailId: "",
-        skills: "Java",
+        skills: [],
         rate: "",
         city: "",
         state: "",
@@ -174,11 +174,4 @@ class index extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    // userObject: state.auth.user,
-    // checkEmail: state.auth.checkEmail,
-  };
-};
-
-export default connect(mapStateToProps)(index);
+export default connect()(index);

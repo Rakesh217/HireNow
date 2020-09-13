@@ -22,6 +22,16 @@ const handleDeleteEmployee = (state, action) => {
   return { ...newState };
 };
 
+const handleGetEmployee = (state, action) => {
+  let newState = { ...state };
+  if (action.result.data !== undefined) {
+    let r = state.result;
+    r.push(action.result.data.allEmployees);
+    newState = Object.assign({}, state, { allEmployees: r });
+  }
+  return { ...newState };
+};
+
 export default (state = initialUserObj, action = {}) => {
   switch (action.type) {
     case Type.CREATE_EMPLOYEE:
@@ -29,6 +39,12 @@ export default (state = initialUserObj, action = {}) => {
     case Type.CREATE_EMPLOYEE_DETAILS_SERVER_RESPONSE_SUCCESS:
       return handleCreateEmployee(state, action);
     case Type.CREATE_EMPLOYEE_DETAILS_SERVER_RESPONSE_ERROR:
+      return { ...state };
+    case Type.GET_EMPLOYEE:
+      return { ...state };
+    case Type.GET_EMPLOYEE_DETAILS_SERVER_RESPONSE_SUCCESS:
+      return handleGetEmployee(state, action);
+    case Type.GET_EMPLOYEE_DETAILS_SERVER_RESPONSE_ERROR:
       return { ...state };
     case Type.DELETE_EMPLOYEE:
       return { ...state };

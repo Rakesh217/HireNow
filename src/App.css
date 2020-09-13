@@ -3,15 +3,54 @@
   height: 500px;
   object-fit: cover
 }
-.Add_Employee{
+
+.Add_Employee {
   padding: 5%;
   content: center;
   width: 70%
 }
 
+.displayCards {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.cards {
+  width: 300px;
+  height: 300px;
+  margin: 10px;
+}
+
 .form-control {
   width: 50% !important;
 }
+
+.displayRows {
+  display: flex;
+  flex-direction: row;
+}
+
+.displayAside {
+  width: 20%;
+
+}
+
+.centerAlign {
+  width: 100%;
+  text-align: center;
+  background-color: #2b5468;
+}
+
+.para {
+  margin: 50px;
+}
+
+
+.displaySection {
+  width: 80%;
+}
+
 /* .App {
   text-align: center;
 }
