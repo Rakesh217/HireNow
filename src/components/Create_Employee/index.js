@@ -19,6 +19,7 @@ class index extends Component {
       },
       loading: false,
       errors: {},
+      options: [],
     };
   }
 
@@ -60,6 +61,19 @@ class index extends Component {
       data: { ...this.state.data, [e.target.name]: e.target.value },
     });
 
+  onChangeOption = (e) => {
+    let list = ["Java", "HTML", "CSS", "Angular", "ReactJS"];
+    const options = this.state.data.skills;
+    let index;
+    if (e.target.checked) {
+      options.push(list[+e.target.value - 1]);
+    } else {
+      index = options.indexOf(list[+e.target.value - 1]);
+      options.splice(index, 1);
+    }
+    console.log("skills", options);
+    this.setState({ data: { skills: options } });
+  };
   render() {
     return (
       <div className="Add_Employee">
@@ -107,24 +121,28 @@ class index extends Component {
 
           <div key={`inline-checkbox`} className="mb-3">
             <Form.Label>Skills</Form.Label>
-            <Form.Check
-              inline
-              label="HTML5"
-              type={"checkbox"}
-              id={`inline-checkbox}-1`}
-            />
-            <Form.Check
-              inline
-              label="CSS3"
-              type={"checkbox"}
-              id={`inline-checkbox}-2`}
-            />
-            <Form.Check
-              inline
-              label="JavaScript"
-              type={"checkbox"}
-              id={`inline-checkbox}-2`}
-            />
+
+            <label>
+              Java
+              <input type="checkbox" value={1} onChange={this.onChangeOption} />
+            </label>
+
+            <label>
+              HTML
+              <input type="checkbox" value={2} onChange={this.onChangeOption} />
+            </label>
+            <label>
+              CSS
+              <input type="checkbox" value={3} onChange={this.onChangeOption} />
+            </label>
+            <label>
+              Angular
+              <input type="checkbox" value={4} onChange={this.onChangeOption} />
+            </label>
+            <label>
+              React js
+              <input type="checkbox" value={5} onChange={this.onChangeOption} />
+            </label>
           </div>
 
           <Form.Group as={Col} controlId="formGridRate">

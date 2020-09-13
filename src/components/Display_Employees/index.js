@@ -13,6 +13,7 @@ import { get_employees } from "../../redux/actions/employees";
 class index extends Component {
   state = {
     allEmployees: [],
+    category: this.props.category,
   };
   componentDidMount() {
     this.props.dispatch(get_employees());
@@ -22,30 +23,45 @@ class index extends Component {
     if (props.allEmployee !== state.allEmployees) {
       return { allEmployees: props.allEmployee };
     }
+    if (props.category !== state.category) {
+      return { category: props.category };
+    }
   }
   render() {
     console.log("allemp", this.state.allEmployees);
-    let p = this.state.allEmployees
-      ? this.state.allEmployees[0].map((item) => {
-          return (
-            <Card className="cards">
-              <Card.Body>
-                <Card.Title>
-                  {item.firstName}, {item.lastName}
-                </Card.Title>
-                <Card.Text>
-                  Email: {item.emailId}
-                  Hourly Rate: {item.rate}
-                  City: {item.city}
-                  State: {item.state}
-                  Zip Code: {item.zip}
-                </Card.Text>
-              </Card.Body>
-            </Card>
-          );
-        })
-      : null;
-    return <div className="displayCards">{p}</div>;
+    const { allEmployees, category } = this.state;
+    let data;
+    if (category !== "") {
+      data = allEmployees.filter(
+        (item) => item.skills.indexOf(this.state.category) !== -1
+      );
+    } else {
+      data = allEmployees;
+    }
+
+    return (
+      <div className="displayCards">
+        {data
+          ? data.map((item) => {
+              return (
+                <div className="cards">
+                  <h3>
+                    {item.firstName}, {item.lastName}
+                  </h3>
+                  <strong className="displayblock">
+                    {" "}
+                    Email: {item.emailId}
+                  </strong>
+                  <strong> Hourly Rate: {item.rate}</strong>
+                  <strong> City: {item.city}</strong>
+                  <strong> State: {item.state}</strong>
+                  <strong> Zip Code: {item.zip}</strong>
+                </div>
+              );
+            })
+          : null}
+      </div>
+    );
   }
 }
 

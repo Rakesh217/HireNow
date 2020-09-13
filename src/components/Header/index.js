@@ -25,14 +25,6 @@ export default class index extends Component {
                 <Link to="/ContactUs">Contact Us</Link>
               </Nav.Link>
             </Nav>
-            <Form inline>
-              <FormControl
-                type="text"
-                placeholder="Search"
-                className="mr-sm-2"
-              />
-              <Button variant="outline-success">Search</Button>
-            </Form>
           </Navbar.Collapse>
         </Navbar>
       </div>

@@ -25,9 +25,9 @@ const handleDeleteEmployee = (state, action) => {
 const handleGetEmployee = (state, action) => {
   let newState = { ...state };
   if (action.result.data !== undefined) {
-    let r = state.result;
-    r.push(action.result.data.allEmployees);
-    newState = Object.assign({}, state, { allEmployees: r });
+    newState = Object.assign({}, state, {
+      allEmployees: [...action.result.data.allEmployees],
+    });
   }
   return { ...newState };
 };
