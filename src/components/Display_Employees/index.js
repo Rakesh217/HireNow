@@ -32,9 +32,8 @@ class index extends Component {
     const { allEmployees, category } = this.state;
     let data;
     if (category !== "") {
-      data = allEmployees.filter(
-        (item) => item.skills.indexOf(this.state.category) !== -1
-      );
+      data = allEmployees.filter((item) => item.skills[0].includes(category));
+      console.log("ss", data);
     } else {
       data = allEmployees;
     }
@@ -48,14 +47,30 @@ class index extends Component {
                   <h3>
                     {item.firstName}, {item.lastName}
                   </h3>
-                  <strong className="displayblock">
-                    {" "}
-                    Email: {item.emailId}
-                  </strong>
-                  <strong> Hourly Rate: {item.rate}</strong>
-                  <strong> City: {item.city}</strong>
-                  <strong> State: {item.state}</strong>
-                  <strong> Zip Code: {item.zip}</strong>
+                  <h7 className="displayblock">
+                    <b>Email: </b>
+                    {item.emailId}
+                  </h7>
+                  <h7 className="displayblock">
+                    <b>Hourly Rate: </b>
+                    {item.rate}
+                  </h7>
+                  <h7 className="displayblock">
+                    <b>Skills:</b>
+                    {item.skills}
+                  </h7>
+                  <h7 displayblock>
+                    <b> City: </b>
+                  </h7>
+                  {item.city}
+                  <h7>
+                    <b> State: </b>
+                    {item.State}
+                  </h7>
+                  <h7>
+                    <b>Zip Code: </b>
+                    {item.zip}
+                  </h7>
                 </div>
               );
             })

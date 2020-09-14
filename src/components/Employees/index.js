@@ -9,13 +9,9 @@ export default class index extends Component {
   };
 
   changeHandle = (value) => {
-    console.log("categoruyggggg", value);
-
     this.setState({ category: value });
   };
   render() {
-    console.log("categoruy", this.state.category);
-
     return (
       <div className="displayRows">
         <aside className="displayAside">
