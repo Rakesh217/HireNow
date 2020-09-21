@@ -78,6 +78,7 @@ class index extends Component {
       data: { ...this.state.data, skills: [...options] },
     });
   };
+
   render() {
     return (
       <div className="Add_Employee">
