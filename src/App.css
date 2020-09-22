@@ -3,15 +3,72 @@
   height: 500px;
   object-fit: cover
 }
-.Add_Employee{
+
+.Add_Employee {
   padding: 5%;
   content: center;
   width: 70%
 }
 
+.displayCards {
+  display: flex;
+  /* flex-direction: row; */
+  flex-wrap: wrap;
+
+  justify-content: space-evenly;
+}
+
+.cards {
+  /* margin-top: 10px;
+  margin: 10px;
+  flex: 0 1; */
+  width: 150px;
+  height: 200px;
+  padding: 15px;
+  flex: 1 0 500px;
+  box-sizing: border-box;
+  margin: 1rem .25em;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+
+}
+
+.displayblock {
+  display: block;
+}
+
 .form-control {
   width: 50% !important;
 }
+
+.displayRows {
+  display: flex;
+  flex-direction: row;
+}
+
+.displayAside {
+  width: 20%;
+
+}
+
+.centerAlign {
+  width: 100%;
+  text-align: center;
+  background-color: #2b5468;
+}
+
+.para {
+  margin: 50px;
+}
+
+
+.displaySection {
+  width: 80%;
+}
+
+.skill {
+  margin: 5px;
+}
+
 /* .App {
   text-align: center;
 }

@@ -1,54 +1,88 @@
 import React, { Component } from "react";
-import { Card, CardColumns } from "react-bootstrap";
+import {
+  Card,
+  CardColumns,
+  Navbar,
+  Form,
+  FormControl,
+  Button,
+} from "react-bootstrap";
 import image1 from "../../img/tom.jpg";
+import { connect } from "react-redux";
+import { get_employees } from "../../redux/actions/employees";
+class index extends Component {
+  state = {
+    allEmployees: [],
+    category: this.props.category,
+  };
+  componentDidMount() {
+    this.props.dispatch(get_employees());
+  }
 
-export default class index extends Component {
+  static getDerivedStateFromProps(props, state) {
+    if (props.allEmployee !== state.allEmployees) {
+      return { allEmployees: props.allEmployee };
+    }
+    if (props.category !== state.category) {
+      return { category: props.category };
+    }
+  }
   render() {
+    console.log("allemp", this.state.allEmployees);
+    const { allEmployees, category } = this.state;
+    let data;
+    if (category !== "") {
+      data = allEmployees.filter((item) => item.skills[0].includes(category));
+      console.log("ss", data);
+    } else {
+      data = allEmployees;
+    }
+
     return (
-      <div>
-        <CardColumns>
-          <Card>
-            <Card.Img variant="top" />
-            <Card.Body>
-              <Card.Title>Jhon Lee</Card.Title>
-              <Card.Text>
-                Work with passion. Nerver miss a dead line. Proficient in React
-                js, HTML5, CSS3. That's it.
-              </Card.Text>
-            </Card.Body>
-          </Card>
-          <Card>
-            <Card.Img variant="top" src="../../img/tom.jpg/100px160" />
-            <Card.Body>
-              <Card.Title>Cary Linda</Card.Title>
-              <Card.Text>
-                Work with passion. Nerver miss a dead line. Proficient in React
-                js, HTML5, CSS3. That's it.
-              </Card.Text>
-            </Card.Body>
-          </Card>
-          <Card>
-            <Card.Img variant="top" src="image1" />
-            <Card.Body>
-              <Card.Title>Tom Cruise</Card.Title>
-              <Card.Text>
-                Work with passion. Never miss a dead line. Proficient in React
-                js, HTML5, CSS3. That's it.
-              </Card.Text>
-            </Card.Body>
-          </Card>
-          <Card>
-            <Card.Img variant="top" />
-            <Card.Body>
-              <Card.Title>Jady Pam</Card.Title>
-              <Card.Text>
-                Work with passion. Nerver miss a dead line. Proficient in React
-                js, HTML5, CSS3. That's it.
-              </Card.Text>
-            </Card.Body>
-          </Card>
-        </CardColumns>
+      <div className="displayCards">
+        {data
+          ? data.map((item) => {
+              return (
+                <div className="cards">
+                  <h3>
+                    {item.firstName}, {item.lastName}
+                  </h3>
+                  <h7 className="displayblock">
+                    <b>Email: </b>
+                    {item.emailId}
+                  </h7>
+                  <h7 className="displayblock">
+                    <b>Hourly Rate: </b>
+                    {item.rate}
+                  </h7>
+                  <h7 className="displayblock">
+                    <b>Skills:</b>
+                    {item.skills}
+                  </h7>
+                  <h7 displayblock>
+                    <b> City: </b>
+                  </h7>
+                  {item.city}
+                  <h7>
+                    <b> State: </b>
+                    {item.State}
+                  </h7>
+                  <h7>
+                    <b>Zip Code: </b>
+                    {item.zip}
+                  </h7>
+                </div>
+              );
+            })
+          : null}
       </div>
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    allEmployee: state.employee.allEmployees,
+  };
+};
+export default connect(mapStateToProps)(index);
