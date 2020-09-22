@@ -10,6 +10,8 @@ import {
 } from "redux-saga/effects";
 import * as Types from "../actions/types";
 import { GetDataFromServer, deleteService } from "../service";
+//http://localhost:5000/api
+const loginUrl = "https://hirenowservice.herokuapp.com/api";
 
 function* createEmployeeDetails(action) {
   try {
@@ -21,7 +23,6 @@ function* createEmployeeDetails(action) {
     formBody = action.result;
     console.log("FormBody" + JSON.stringify(formBody));
     const reqMethod = "POST";
-    const loginUrl = "http://localhost:5000/api";
     const body = {
       query: `mutation{
     addEmployee(Employee:{
@@ -70,7 +71,7 @@ function* getEmployeeDetails(action) {
     formBody = action.result;
     console.log("FormBody" + JSON.stringify(formBody));
     const reqMethod = "POST";
-    const loginUrl = "http://localhost:5000/api";
+    // const loginUrl = "http://localhost:5000/api";
     const body = {
       query: `query{
   allEmployees{
